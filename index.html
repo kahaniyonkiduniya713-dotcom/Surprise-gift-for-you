@@ -6,6 +6,7 @@
 <title>For Aisha ❤️</title>
 
 <style>
+/* CSS STYLES */
 *{box-sizing:border-box;}
 body{
 margin:0;
@@ -44,11 +45,13 @@ opacity:0;
 transform:translateY(20px);
 transition:.6s ease;
 pointer-events:none;
+display:none; /* Added for better hiding */
 }
 .page.active{
 opacity:1;
 transform:translateY(0);
 pointer-events:auto;
+display:flex; /* Show when active */
 }
 
 h1{font-size:20px;color:#ff4f8b;margin-bottom:10px;}
@@ -63,6 +66,7 @@ border-radius:30px;
 cursor:pointer;
 margin-top:15px;
 transition:.3s ease;
+box-shadow: 0 4px 10px rgba(255, 79, 139, 0.3);
 }
 .btn:hover{background:#ff2f76;}
 
@@ -71,6 +75,7 @@ position:absolute;
 font-size:16px;
 animation:rise 14s linear infinite;
 opacity:.5;
+z-index: -1;
 }
 @keyframes rise{
 0%{transform:translateY(100vh);opacity:0;}
@@ -83,11 +88,13 @@ opacity:.5;
 width:300px;height:180px;background:#ff8fb6;
 border-radius:15px;position:relative;overflow:hidden;
 box-shadow:0 10px 25px rgba(0,0,0,.15);
+cursor: pointer;
 }
 .flap{
 position:absolute;width:100%;height:90px;
 background:#ff6fa5;top:0;left:0;
 transform-origin:top;transition:.6s ease;
+z-index: 2;
 }
 .seal{
 position:absolute;top:60px;left:50%;
@@ -96,112 +103,82 @@ background:white;width:50px;height:50px;
 border-radius:50%;display:flex;
 align-items:center;justify-content:center;
 cursor:pointer;
+z-index: 3;
+font-size: 24px;
 }
 .letter{
 position:absolute;bottom:-170px;left:10%;
 width:80%;height:150px;background:white;
 border-radius:10px;padding:15px;
 font-size:14px;transition:.7s ease;overflow:auto;
+z-index: 1;
+text-align: center;
 }
-.envelope.open .flap{transform:rotateX(180deg);}
-.envelope.open .letter{bottom:15px;}
+.envelope.open .flap{transform:rotateX(180deg); z-index: 0;}
+.envelope.open .letter{bottom:15px; z-index: 2;}
 .envelope.open .seal{display:none;}
 
 .proposal-img{
-max-height:60vh;max-width:90%;
+max-height:50vh;max-width:90%;
 border-radius:15px;
 box-shadow:0 0 20px #ff4f8b;
 animation:softFloat 4s ease-in-out infinite;
+margin-bottom: 20px;
 }
 @keyframes softFloat{
 0%,100%{transform:translateY(0);}
 50%{transform:translateY(-8px);}
 }
 
-#noBtn{transition:all .4s ease;}
-
 .gallery{
 display:flex;flex-wrap:wrap;
-justify-content:center;gap:15px;
+justify-content:center;gap:10px;
+max-width: 400px;
 }
-.memory{width:42%;animation:floatPhoto 4s ease-in-out infinite;}
+.memory{width:45%;animation:floatPhoto 4s ease-in-out infinite;}
 .memory:nth-child(2){animation-delay:.5s;}
 .memory:nth-child(3){animation-delay:1s;}
 .memory:nth-child(4){animation-delay:1.5s;}
+
 @keyframes floatPhoto{
 0%,100%{transform:translateY(0);}
 50%{transform:translateY(-6px);}
 }
 .memory img{
-width:100%;border-radius:15px;
-box-shadow:0 0 15px #ff4f8b,0 0 25px rgba(255,79,139,.4);
+width:100%; 
+height: 120px; /* Fixed height for neatness */
+object-fit: cover;
+border-radius:10px;
+box-shadow:0 0 10px #ff4f8b;
 }
-.memory p{font-size:12px;margin-top:5px;color:#ff4f8b;}
+.memory p{font-size:10px;margin-top:5px;color:#ff4f8b;}
 
-.final-letter{
-background:white;
-padding:25px;
-border-radius:20px;
-max-width:360px;
-max-height:75vh;
-overflow:auto;
-box-shadow:0 0 25px rgba(255,79,139,.5);
-animation:fadeIn 1s ease;
-font-family:Georgia,serif;
-position:relative;
-}
-.final-letter h1{
-font-family:"Brush Script MT",cursive;
-font-size:24px;
-color:#ff2f76;
-}
-.final-letter p{
-font-size:14px;
-line-height:1.8;
-}
 .tata{
 color:#ff2f76;
 font-weight:bold;
 }
 
-@keyframes fadeIn{
-from{opacity:0;transform:scale(.95);}
-to{opacity:1;transform:scale(1);}
-}
 </style>
 </head>
 
 <body>
 
-<div class="page-number" id="pageNumber">1 / 7</div>
-
-<audio id="music" preload="auto" loop>
+<audio id="music" loop>
 <source src="https://files.catbox.moe/yoxlob.mp3" type="audio/mpeg">
 </audio>
 
-<script>
-for(let i=0;i<20;i++){
-let h=document.createElement("div");
-h.innerHTML="💖";
-h.className="float";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=(8+Math.random()*6)+"s";
-document.body.appendChild(h);
-}
-</script>
+<div class="page-number" id="pageNumber">1 / 5</div>
 
-<!-- Page 1 -->
 <div class="page active" id="p1">
 <h1>For My <span class="tata">Aisha</span> ❤️</h1>
 <p>A little surprise from your Arjun 💕</p>
-<button class="btn" onclick="start()">Open</button>
+<button class="btn" onclick="start()">Open Surprise</button>
 </div>
 
-<!-- Page 2 -->
 <div class="page" id="p2">
-<div class="envelope" id="env">
+<div class="envelope" id="env" onclick="openEnv()">
 <div class="flap"></div>
-<div class="seal" onclick="openEnv()">💌</div>
+<div class="seal">💌</div>
 <div class="letter">
 My <span class="tata">Aisha</span> ❤️<br><br>
 You are my peace, my smile, my safe place.<br><br>
@@ -210,48 +187,90 @@ I will always choose you.<br><br>
 Forever yours,<br>Arjun 💕
 </div>
 </div>
-<button class="btn" onclick="next(3)">Next</button>
+<p style="margin-top: 20px; font-size: 12px; color: #ff4f8b;">(Tap the envelope)</p>
+<button class="btn" onclick="next(3)">Next &rarr;</button>
 </div>
 
-<!-- Page 3 -->
 <div class="page" id="p3">
 <img src="https://i.ibb.co/84ryss5v/1771074492509.png" class="proposal-img">
 <h1>Will You Be Mine Forever? 💍</h1>
-<button class="btn" id="noBtn" onclick="handleNo()">No 😜</button>
-<button class="btn" id="yesBtn" style="display:none;" onclick="next(4)">Yes ❤️</button>
+<div style="margin-top: 20px;">
+    <button class="btn" id="noBtn" onclick="handleNo()" style="background:#555; margin-right: 10px;">No 😜</button>
+    <button class="btn" id="yesBtn" style="display:none;" onclick="next(4)">Yes, Forever! ❤️</button>
+</div>
 </div>
 
-<!-- Page 4 -->
 <div class="page" id="p4">
 <h1>Our Beautiful Memories 💕</h1>
 <div class="gallery">
 <div class="memory">
 <img src="https://i.ibb.co/35JrHKKL/file-000000007a3872088be3fefbf751e146.png">
-<p>Every moment feels magical ✨</p>
+<p>Magic ✨</p>
 </div>
 <div class="memory">
 <img src="https://i.ibb.co/WNG9FcHQ/file-0000000023047208a799c2e8a2d012a4.png">
-<p>Your smile lights my world 💖</p>
+<p>Your Smile 💖</p>
 </div>
 <div class="memory">
 <img src="https://i.ibb.co/yFCRZL6z/file-0000000052e07208bd7df1ace58385f0.png">
-<p>Life feels complete with you ❤️</p>
+<p>My World 🌍</p>
 </div>
 <div class="memory">
 <img src="https://i.ibb.co/TqmQJC67/file-00000000c6787208b296da1cb926223f.png">
-<p>Forever starts with us 💕</p>
+<p>Forever 💕</p>
 </div>
 </div>
-<button class="btn" onclick="next(5)">Next</button>
+<button class="btn" onclick="next(5)">Next &rarr;</button>
 </div>
 
-<!-- Page 6 -->
-<div class="page" id="p6">
+<div class="page" id="p5">
 <img src="https://i.ibb.co/xtzxpm8S/file-000000001dc87208a9220da35abc14b9-1.png" class="proposal-img">
 <h1>Forever & Always ❤️</h1>
 <p>You are my today and all my tomorrows.</p>
-<button class="btn" onclick="next(7)">Final Message ❤️</button>
+<button class="btn" onclick="alert('I Love You Aisha! ❤️')">I Love You ❤️</button>
 </div>
 
+<script>
+// Floating Hearts Logic
+for(let i=0;i<20;i++){
+let h=document.createElement("div");
+h.innerHTML="💖";
+h.className="float";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(8+Math.random()*6)+"s";
+document.body.appendChild(h);
+}
+
+// Button Logic
+const music = document.getElementById("music");
+
+function start() {
+    music.play().catch(error => console.log("Music play blocked by browser"));
+    next(2);
+}
+
+function openEnv() {
+    document.querySelector('.envelope').classList.add('open');
+}
+
+function next(pageNum) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    
+    // Show target page
+    document.getElementById('p' + pageNum).classList.add('active');
+    
+    // Update counter
+    document.getElementById('pageNumber').innerText = pageNum + " / 5";
+}
+
+function handleNo() {
+    // Hide No button, Show Yes button
+    document.getElementById('noBtn').style.display = 'none';
+    document.getElementById('yesBtn').style.display = 'inline-block';
+}
+</script>
+
 </body>
-</html>
+  </html>
+                               
