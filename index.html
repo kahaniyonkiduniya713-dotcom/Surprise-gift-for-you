@@ -15,7 +15,6 @@ color:#444;
 overflow:hidden;
 }
 
-/* Pages */
 .page{
 position:absolute;
 width:100%;
@@ -38,7 +37,7 @@ pointer-events:auto;
 }
 
 h1{font-size:20px;color:#ff4f8b;margin-bottom:10px;}
-p{font-size:15px;max-width:330px;line-height:1.5;}
+p{font-size:15px;max-width:330px;line-height:1.6;}
 
 .btn{
 background:#ff4f8b;
@@ -64,7 +63,6 @@ opacity:.5;
 100%{transform:translateY(-10vh);opacity:0;}
 }
 
-/* Envelope */
 .envelope{
 width:300px;height:180px;background:#ff8fb6;
 border-radius:15px;position:relative;overflow:hidden;
@@ -211,23 +209,22 @@ Forever yours,<br>Arjun 💕
 <button class="btn" onclick="next(7)">Final Message ❤️</button>
 </div>
 
-<!-- Page 7 -->
+<!-- Page 7 Updated -->
 <div class="page" id="p7">
 <h1>Forever Yours ❤️</h1>
 <p>
 My Aisha ❤️,<br><br>
+From the moment you entered my life, everything became brighter and more meaningful.  
+You are not just my love — you are my peace, my strength, and my happiness. 💕<br><br>
 
-From the moment you came into my life, everything changed in the most beautiful way.  
-You are not just someone I love — you are my comfort, my strength, and my happiest place. 💕<br><br>
+Every dream I see has you in it, every heartbeat whispers your name.  
+Distance means nothing when two hearts are truly connected. 🌍✨<br><br>
 
-Every heartbeat of mine carries your name, and every dream I see has you in it.  
-No matter how far the world tries to keep us apart, my soul always finds you. 🌍✨<br><br>
+With you, love feels pure. With you, life feels complete.  
+I promise to cherish you, support you, and love you more deeply every single day. 💖<br><br>
 
-With you, love feels pure. With you, life feels meaningful.  
-You are my today, my tomorrow, and every forever after that. 💖<br><br>
-
-I promise to stand by you, cherish you, and love you more deeply with every passing day.  
-You are my greatest blessing, and I am endlessly grateful for you. ❤️<br><br>
+No matter what happens in this world,  
+my heart will always belong to you. ❤️<br><br>
 
 Forever yours,<br>
 Arjun 💞
@@ -236,20 +233,12 @@ Arjun 💞
 </div>
 
 <script>
-function start(){
-document.getElementById("music").play();
-next(2);
-}
-
+function start(){document.getElementById("music").play();next(2);}
 function next(n){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById("p"+n).classList.add("active");
 }
-
-function openEnv(){
-document.getElementById("env").classList.add("open");
-}
-
+function openEnv(){document.getElementById("env").classList.add("open");}
 let noClicks=0;
 function handleNo(){
 let btn=document.getElementById("noBtn");
@@ -263,14 +252,11 @@ btn.style.display="none";
 document.getElementById("yesBtn").style.display="inline-block";
 }
 }
-
-/* Quiz */
 let quiz=[
 {q:"When I see Aisha, what do I feel? 💕",o:["Peace 🤍","Love ❤️","Everything ✨"],c:2},
 {q:"Who loves more? 😜",o:["Aisha 💖","Arjun 😎","Both equally ❤️"],c:2}
 ];
 let qi=0;
-
 function loadQuiz(){
 document.getElementById("question").innerText=quiz[qi].q;
 let opt=document.getElementById("options");
@@ -283,7 +269,6 @@ b.onclick=()=>check(i);
 opt.appendChild(b);
 });
 }
-
 function check(i){
 if(i==quiz[qi].c){
 qi++;
@@ -291,7 +276,6 @@ if(qi<quiz.length) loadQuiz();
 else next(6);
 }else alert("Try again 😜");
 }
-
 let oldNext=next;
 next=function(n){
 oldNext(n);
