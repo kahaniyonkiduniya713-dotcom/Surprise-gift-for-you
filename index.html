@@ -37,16 +37,8 @@ transform:translateY(0);
 pointer-events:auto;
 }
 
-h1{
-font-size:20px;
-color:#ff4f8b;
-margin-bottom:10px;
-}
-p{
-font-size:15px;
-max-width:330px;
-line-height:1.5;
-}
+h1{font-size:20px;color:#ff4f8b;margin-bottom:10px;}
+p{font-size:15px;max-width:330px;line-height:1.5;}
 
 .btn{
 background:#ff4f8b;
@@ -57,7 +49,6 @@ border-radius:30px;
 cursor:pointer;
 margin-top:15px;
 transition:.3s ease;
-position:relative;
 }
 .btn:hover{background:#ff2f76;}
 
@@ -75,58 +66,35 @@ opacity:.5;
 
 /* Envelope */
 .envelope{
-width:300px;
-height:180px;
-background:#ff8fb6;
-border-radius:15px;
-position:relative;
-overflow:hidden;
+width:300px;height:180px;background:#ff8fb6;
+border-radius:15px;position:relative;overflow:hidden;
 box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 .flap{
-position:absolute;
-width:100%;
-height:90px;
-background:#ff6fa5;
-top:0;
-left:0;
-transform-origin:top;
-transition:.6s ease;
+position:absolute;width:100%;height:90px;
+background:#ff6fa5;top:0;left:0;
+transform-origin:top;transition:.6s ease;
 }
 .seal{
-position:absolute;
-top:60px;
-left:50%;
+position:absolute;top:60px;left:50%;
 transform:translateX(-50%);
-background:white;
-width:50px;
-height:50px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
+background:white;width:50px;height:50px;
+border-radius:50%;display:flex;
+align-items:center;justify-content:center;
 cursor:pointer;
 }
 .letter{
-position:absolute;
-bottom:-170px;
-left:10%;
-width:80%;
-height:150px;
-background:white;
-border-radius:10px;
-padding:15px;
-font-size:14px;
-transition:.7s ease;
-overflow:auto;
+position:absolute;bottom:-170px;left:10%;
+width:80%;height:150px;background:white;
+border-radius:10px;padding:15px;
+font-size:14px;transition:.7s ease;overflow:auto;
 }
 .envelope.open .flap{transform:rotateX(180deg);}
 .envelope.open .letter{bottom:15px;}
 .envelope.open .seal{display:none;}
 
 .proposal-img{
-max-height:60vh;
-max-width:90%;
+max-height:60vh;max-width:90%;
 border-radius:15px;
 box-shadow:0 0 20px #ff4f8b;
 animation:softFloat 4s ease-in-out infinite;
@@ -136,14 +104,9 @@ animation:softFloat 4s ease-in-out infinite;
 50%{transform:translateY(-8px);}
 }
 
-#noBtn{transition:all .4s ease;}
-
 .gallery{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
-margin-top:10px;
+display:flex;flex-wrap:wrap;
+justify-content:center;gap:15px;
 }
 .memory{width:42%;animation:floatPhoto 4s ease-in-out infinite;}
 .memory:nth-child(2){animation-delay:.5s;}
@@ -154,15 +117,10 @@ margin-top:10px;
 50%{transform:translateY(-6px);}
 }
 .memory img{
-width:100%;
-border-radius:15px;
+width:100%;border-radius:15px;
 box-shadow:0 0 15px #ff4f8b,0 0 25px rgba(255,79,139,.4);
 }
-.memory p{
-font-size:12px;
-margin-top:5px;
-color:#ff4f8b;
-}
+.memory p{font-size:12px;margin-top:5px;color:#ff4f8b;}
 </style>
 </head>
 
@@ -238,13 +196,43 @@ Forever yours,<br>Arjun 💕
 <button class="btn" onclick="next(5)">Next</button>
 </div>
 
+<!-- Page 5 Quiz -->
+<div class="page" id="p5">
+<h1>Little Love Quiz 💖</h1>
+<p id="question"></p>
+<div id="options"></div>
+</div>
+
+<!-- Page 6 -->
+<div class="page" id="p6">
+<img src="https://i.ibb.co/xtzxpm8S/file-000000001dc87208a9220da35abc14b9-1.png" class="proposal-img">
+<h1>Forever & Always ❤️</h1>
+<p>You are my today and all my tomorrows.</p>
+<button class="btn" onclick="next(7)">Final Message ❤️</button>
+</div>
+
+<!-- Page 7 -->
+<div class="page" id="p7">
+<h1>Forever Yours ❤️</h1>
+<p>I love you always, Aisha 💕</p>
+<button class="btn" onclick="next(1)">Start Again 💞</button>
+</div>
+
 <script>
-function start(){document.getElementById("music").play();next(2);}
+function start(){
+document.getElementById("music").play();
+next(2);
+}
+
 function next(n){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById("p"+n).classList.add("active");
 }
-function openEnv(){document.getElementById("env").classList.add("open");}
+
+function openEnv(){
+document.getElementById("env").classList.add("open");
+}
+
 let noClicks=0;
 function handleNo(){
 let btn=document.getElementById("noBtn");
@@ -257,6 +245,40 @@ btn.style.top=Math.random()*60+"%";
 btn.style.display="none";
 document.getElementById("yesBtn").style.display="inline-block";
 }
+}
+
+/* Quiz */
+let quiz=[
+{q:"When I see Aisha, what do I feel? 💕",o:["Peace 🤍","Love ❤️","Everything ✨"],c:2},
+{q:"Who loves more? 😜",o:["Aisha 💖","Arjun 😎","Both equally ❤️"],c:2}
+];
+let qi=0;
+
+function loadQuiz(){
+document.getElementById("question").innerText=quiz[qi].q;
+let opt=document.getElementById("options");
+opt.innerHTML="";
+quiz[qi].o.forEach((t,i)=>{
+let b=document.createElement("button");
+b.className="btn";
+b.innerText=t;
+b.onclick=()=>check(i);
+opt.appendChild(b);
+});
+}
+
+function check(i){
+if(i==quiz[qi].c){
+qi++;
+if(qi<quiz.length) loadQuiz();
+else next(6);
+}else alert("Try again 😜");
+}
+
+let oldNext=next;
+next=function(n){
+oldNext(n);
+if(n==5){qi=0;loadQuiz();}
 }
 </script>
 
